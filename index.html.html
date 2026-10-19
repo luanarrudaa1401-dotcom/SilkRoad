@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#100d12">
+<title>SilkRoad91 — Jogos</title>
+<style>
+:root{--bg:#100d12;--panel:#211b25;--purple:#8950ff;--purple2:#b47cff;--text:#f7f3fa;--muted:#aaa1b2}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Arial,sans-serif;padding-bottom:92px}
+.wrap{max-width:1000px;margin:auto;padding:14px 14px 20px}
+.shortcuts{display:flex;gap:18px;overflow-x:auto;padding:4px 0 18px;scrollbar-width:none}.shortcuts::-webkit-scrollbar{display:none}
+.shortcut{flex:0 0 82px;text-align:center;color:#c9c1ce;font-size:11px;font-weight:800;letter-spacing:.3px}
+.circle{width:68px;height:68px;border-radius:50%;margin:0 auto 9px;display:grid;place-items:center;background:radial-gradient(circle at 35% 25%,#3a3041,#17131a 68%);border:1px solid #39303f;box-shadow:inset 0 0 0 5px #ffffff05;font-size:32px}
+.shortcut:nth-child(3) .circle,.shortcut:nth-child(6) .circle{border:3px solid var(--purple);box-shadow:0 0 18px #8a50ff3a}
+.banner{position:relative;min-height:220px;border-radius:20px;overflow:hidden;margin:4px 0 27px;background:radial-gradient(ellipse at 75% 45%,#7d2de9 0,#37135d 27%,transparent 56%),linear-gradient(110deg,#171020,#34104f 58%,#120c1b);display:flex;align-items:center;padding:26px;isolation:isolate}
+.banner:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 32px,#ffffff07 33px 35px);z-index:-1}
+.banner:after{content:"✦  ◉  ✧  ◈";position:absolute;right:5%;bottom:18px;color:#d6b6ff;font-size:clamp(25px,5vw,45px);letter-spacing:8px;opacity:.8}
+.banner-copy{max-width:58%;z-index:1}.eyebrow{font-size:11px;font-weight:900;letter-spacing:2px;color:#d8baff}.banner h1{font-size:clamp(30px,6vw,52px);line-height:.92;margin:10px 0;font-weight:1000;letter-spacing:-2px}.banner h1 span{color:#c08bff}.banner p{margin:0;font-size:13px;color:#eee0ff}.banner button{margin-top:17px;border:0;border-radius:999px;background:linear-gradient(100deg,#a76aff,#7440e8);padding:10px 18px;color:white;font-weight:900}
+.banner-art{position:absolute;right:5%;top:50%;transform:translateY(-50%);font-size:clamp(80px,17vw,155px);filter:drop-shadow(0 0 18px #a96aff);opacity:.95}
+.section-head{display:flex;align-items:center;gap:11px;margin:0 0 14px;font-size:21px;font-weight:950;letter-spacing:-.5px}.section-icon{width:28px;height:28px;border-radius:8px;background:#7d45e7;display:grid;place-items:center;font-size:16px}
+.games{display:grid;grid-template-columns:1fr 1.25fr 1.25fr;grid-template-rows:repeat(2,minmax(95px,1fr));gap:12px}
+.game{position:relative;min-height:105px;border-radius:13px;overflow:hidden;border:1px solid #4a3c4e;background:#29202e;box-shadow:0 4px 12px #0004;isolation:isolate}
+.game:before{content:"";position:absolute;inset:0;z-index:-1;background:var(--art)}
+.game:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,#09060ddd)}
+.game .emoji{position:absolute;right:8px;top:4px;font-size:clamp(30px,6vw,54px);filter:drop-shadow(0 3px 4px #0008)}
+.game h3{position:absolute;z-index:1;left:10px;right:8px;bottom:24px;margin:0;font-size:clamp(13px,2vw,19px);font-weight:1000;line-height:1;text-shadow:0 2px 5px #000}.game small{position:absolute;z-index:1;left:10px;bottom:8px;color:#e7d9f4;font-size:9px;font-weight:800;letter-spacing:1px}
+.game.feature{grid-row:span 2;min-height:225px}.game.feature .emoji{font-size:clamp(65px,10vw,100px);top:20%}.game.feature h3{font-size:clamp(20px,3vw,28px)}
+.game.wide{grid-column:span 2}
+.game:active{transform:scale(.985)}
+.tiny-row{display:flex;justify-content:space-between;align-items:center;margin:24px 0 13px}.tiny-row .section-head{margin:0}.see-all{border:0;background:var(--purple);color:white;border-radius:999px;padding:9px 14px;font-weight:900;font-size:11px}
+.chips{display:flex;gap:8px;overflow:auto;padding-bottom:10px}.chip{flex:0 0 auto;border:1px solid #3b303f;border-radius:999px;padding:9px 13px;color:#d8ccdf;font-size:12px;background:#1a151e}.chip.active{background:#7540db;border-color:#a57aff;color:#fff}
+.bottom-nav{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#28232aee;backdrop-filter:blur(18px);border-top:1px solid #ffffff12;display:flex;justify-content:space-around;align-items:center;padding:8px 5px max(8px,env(safe-area-inset-bottom))}
+.nav{border:0;background:transparent;color:#d9d2dc;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:52px;font-size:10px}.nav .ico{font-size:22px;line-height:1}.nav.active{color:#a77aff}.nav.center .ico{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#9d63ff,#6d39db);color:#1b1029;border:5px solid #30243b;margin-top:-27px;box-shadow:0 0 0 3px #17121b;font-size:25px}
+.notice{font-size:10px;line-height:1.4;color:#887f8e;text-align:center;margin:18px 8px 4px}
+@media(min-width:700px){.wrap{padding:22px 26px 30px}.banner{min-height:270px}.games{grid-template-rows:repeat(2,145px)}.game.feature{min-height:302px}.bottom-nav{left:50%;transform:translateX(-50%);width:min(100%,1000px);border-radius:18px 18px 0 0}}
+</style>
+</head>
+<body>
+<main class="wrap">
+ <nav class="shortcuts" aria-label="Atalhos">
+  <div class="shortcut"><div class="circle">💸</div>CASHBACK</div>
+  <div class="shortcut"><div class="circle">📣</div>PROMOÇÕES</div>
+  <div class="shortcut"><div class="circle">🏆</div>TORNEIOS</div>
+  <div class="shortcut"><div class="circle">🏪</div>LOJA</div>
+  <div class="shortcut"><div class="circle">🃏</div>AO VIVO</div>
+  <div class="shortcut"><div class="circle">🎯</div>MISSÕES</div>
+ </nav>
+ <section class="banner">
+  <div class="banner-copy"><div class="eyebrow">BEM-VINDO À SILKROAD91</div><h1>JOGUE<br><span>SEM PARAR</span></h1><p>Descubra novos jogos e desafie seus recordes.</p><button onclick="document.getElementById('recomendados').scrollIntoView({behavior:'smooth'})">EXPLORAR JOGOS ↗</button></div>
+  <div class="banner-art" aria-hidden="true">🎮</div>
+ </section>
+ <section id="recomendados">
+  <h2 class="section-head"><span class="section-icon">▣</span> RECOMENDADOS</h2>
+  <div class="games">
+   <button class="game feature" style="--art:linear-gradient(145deg,#6e0c21,#ed263b 45%,#200a18)" onclick="openGame('Corrida Turbo')"><span class="emoji">🏎️</span><h3>CORRIDA<br>TURBO</h3><small>ARCADE • CORRIDA</small></button>
+   <button class="game" style="--art:linear-gradient(135deg,#116d37,#9adf43 50%,#1c4229)" onclick="openGame('Dragão Dourado')"><span class="emoji">🐉</span><h3>DRAGÃO DOURADO</h3><small>AVENTURA</small></button>
+   <button class="game" style="--art:linear-gradient(135deg,#45148a,#f04bbd 55%,#38114f)" onclick="openGame('Coelho Saltitante')"><span class="emoji">🐰</span><h3>COELHO SALTITANTE</h3><small>PLATAFORMA</small></button>
+   <button class="game" style="--art:linear-gradient(135deg,#682d9e,#ed77cb 48%,#21122f)" onclick="openGame('Mundo das Cores')"><span class="emoji">🧩</span><h3>MUNDO DAS CORES</h3><small>PUZZLE</small></button>
+   <button class="game" style="--art:linear-gradient(135deg,#9c4d14,#ffd45c 50%,#4b1d13)" onclick="openGame('Tigre Dourado')"><span class="emoji">🐯</span><h3>TIGRE DOURADO</h3><small>CASUAL</small></button>
+   <button class="game wide" style="--art:linear-gradient(135deg,#742727,#f07b36 48%,#30131b)" onclick="openGame('Desafio Selvagem')"><span class="emoji">🦬</span><h3>DESAFIO SELVAGEM</h3><small>HABILIDADE</small></button>
+  </div>
+ </section>
+ <div class="tiny-row"><h2 class="section-head"><span class="section-icon">✦</span> CATEGORIAS</h2><button class="see-all" onclick="document.getElementById('categorias').scrollIntoView({behavior:'smooth'})">VER TODOS</button></div>
+ <div class="chips" id="categorias"><button class="chip active" onclick="filterChip(this)">Todos</button><button class="chip" onclick="filterChip(this)">Corrida</button><button class="chip" onclick="filterChip(this)">Aventura</button><button class="chip" onclick="filterChip(this)">Puzzle</button><button class="chip" onclick="filterChip(this)">Arcade</button><button class="chip" onclick="filterChip(this)">Esportes</button></div>
+ <p class="notice">Protótipo visual. Os cards são exemplos de interface; os jogos reais serão conectados após escolher fontes com licença de incorporação. Sem apostas ou pagamentos nesta versão.</p>
+</main>
+<nav class="bottom-nav">
+ <button class="nav active" onclick="navTo('recomendados',this)"><span class="ico">⌂</span>Início</button>
+ <button class="nav" onclick="navTo('categorias',this)"><span class="ico">🎲</span>Jogos</button>
+ <button class="nav center" onclick="showProfile()"><span class="ico">●</span><span>Conta</span></button>
+ <button class="nav" onclick="showInfo('Novidades')"><span class="ico">📣</span>Novidades</button>
+ <button class="nav" onclick="showInfo('Menu')"><span class="ico">☰</span>Menu</button>
+</nav>
+<script>
+function openGame(name){alert(name+'\\n\\nEste é um protótipo de design. O jogo será conectado quando escolhermos uma API ou jogo HTML5 com permissão de incorporação.')}
+function showProfile(){alert('Área de conta: poderá ser adicionada depois, sem coletar dados nesta versão.')}
+function showInfo(name){alert(name+'\\n\\nEsta seção será configurada na próxima etapa.')}
+function navTo(id,el){document.getElementById(id).scrollIntoView({behavior:'smooth'});document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));el.classList.add('active')}
+function filterChip(el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');}
+</script>
+</body>
+</html>
